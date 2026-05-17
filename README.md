@@ -15,3 +15,4 @@ Explainable AI Research Discovery System
 ## Current Status
 
 Day 1: Project setup
+Day 2: Arxiv Paper Retrieval
