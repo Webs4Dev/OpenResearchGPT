@@ -1,9 +1,10 @@
 import arxiv
-import time 
+from backend.schemas.paper import Paper 
 
 client = arxiv.Client(
-    num_retries=5,
-    delay_seconds=5,  
+    num_retries=2,
+    delay_seconds=3,
+    page_size=10  
 )
 
 def search_papers(query:str,max_results:int):
@@ -12,20 +13,19 @@ def search_papers(query:str,max_results:int):
         max_results=max_results,
         sort_by=arxiv.SortCriterion.SubmittedDate
     )
-    results = []
+    papers=[] 
     try:
         for paper in client.results(search):
-            results.append({
-                "title": paper.title,
-                "summary": paper.summary,
-                "authors": [a.name for a in paper.authors],
-                "published":paper.published,
-                "pdf_url": paper.pdf_url,
-            })
-
-            time.sleep(1)
+            papers.append(Paper(
+                title=paper.title,
+                abstract= paper.summary,
+                authors= [a.name for a in paper.authors],
+                published_year=paper.published.year,
+                url= paper.pdf_url,
+                source="arxiv"
+            ))
 
     except Exception as e:
         print(f"Error: {e}")
 
-    return results
+    return papers
