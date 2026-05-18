@@ -16,3 +16,4 @@ Explainable AI Research Discovery System
 
 Day 1: Project setup
 Day 2: Arxiv Paper Retrieval
+Day 3: Semantic Scholar paper & Unified Retrieval
