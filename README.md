@@ -15,5 +15,6 @@ Explainable AI Research Discovery System
 ## Current Status
 
 Day 1: Project setup
-Day 2: Arxiv Paper Retrieval
-Day 3: Semantic Scholar paper & Unified Retrieval
+Day 2: ArXiv Paper Retrieval
+Day 3: Semantic Scholar paper Retrieval
+Day 4: Retrieval Manager and Logging 
