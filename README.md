@@ -149,6 +149,7 @@ Q&A Agent
 - ✅ Day 2: arXiv paper retrieval
 - ✅ Day 3: Semantic Scholar retrieval
 - ✅ Day 4: Retrieval manager and logging
+- ✅ Day 5: PubMed,OpenAlex,CrossRef retrieval
 
 ---
 
