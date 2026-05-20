@@ -1,6 +1,6 @@
-from backend.retrieval.retriever_semantic import search_papers as semantic_search
+from backend.retrieval.retriever_openalex import search_papers as openalex_search
 
-papers = semantic_search(
+papers = openalex_search(
     query="multi agent memory systems",
     max_results=5
     )

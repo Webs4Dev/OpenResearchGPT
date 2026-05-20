@@ -1,2 +1,2 @@
 def log(message):
-    print(f"[OpenResearchGPT] {message}")
+    print(f"[OpenResearch] {message}")

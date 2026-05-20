@@ -1,4 +1,4 @@
-from backend.retrieval.arxiv_retriever import search_papers as arxiv_search
+from backend.retrieval.retriever_arxiv import search_papers as arxiv_search
 
 papers = arxiv_search(
     query="multi agent memory systems",
