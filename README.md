@@ -2,61 +2,62 @@
 
 OpenResearchGPT is an open-source multi-agent research discovery and analysis platform designed to help users find, understand, rank, and interact with research papers from multiple sources.
 
-Instead of acting as a simple paper search tool, OpenResearchGPT aims to explain *why* papers are recommended, deeply analyze research content, and help users discover papers relevant to their own projects.
+Unlike traditional paper search tools, OpenResearchGPT focuses on explainability and research understanding — helping users discover relevant papers, understand *why* they matter, and connect research findings directly to their own projects.
 
 ---
 
 ## Core Features
 
 ### Multi-Source Research Retrieval
-Retrieve research papers from multiple sources:
+
+Retrieve research papers from multiple academic sources:
 
 - arXiv
 - Semantic Scholar
 - PubMed
 - OpenAlex
 - CrossRef
-- Government research sites
+- Government research portals
 - University repositories
-- Other web sources
+- Additional web-based sources
 
 ---
 
 ### Web Retrieval Agent
 
-Discover and retrieve research papers from websites that do not provide Python libraries or APIs.
+Discover research papers from websites that do not provide APIs or official Python libraries.
 
 Examples:
 
-- .gov research portals
-- research lab websites
-- university repositories
-- organization publications
+- Government research portals
+- Research lab websites
+- University repositories
+- Organization publications
 
 ---
 
 ### Paper Ranking Agent
 
-Rank papers using factors such as:
+Rank research papers using multiple factors:
 
-- semantic similarity
-- recency
-- citation count
-- methodology match
-- source quality
-- project relevance
+- Semantic similarity
+- Recency
+- Citation count
+- Methodology similarity
+- Source quality
+- Project relevance
 
 ---
 
 ### Explanation Agent
 
-Explain why a paper was selected.
+Explain *why* a paper was recommended.
 
 Example:
 
-Paper: Memory Architectures for LLM Agents
+**Paper:** *Memory Architectures for LLM Agents*
 
-Why selected:
+**Why it was selected:**
 
 - Matches multi-agent memory systems
 - Strong methodology overlap
@@ -67,27 +68,27 @@ Why selected:
 
 ### PDF Deep Dive Agent
 
-Upload a paper and let the system:
+Upload a research paper and let the system:
 
-- identify relevant sections
-- highlight useful content
-- explain difficult concepts
-- answer questions
-- connect paper ideas to your project
+- Identify important sections
+- Highlight useful content
+- Explain difficult concepts
+- Answer questions
+- Connect research ideas to your project
 
 ---
 
 ### Citation-Aware RAG
 
-Interact with papers through conversational retrieval while preserving citations and context.
+Interact with research papers through conversational retrieval while preserving citations and contextual understanding.
 
 ---
 
-### Future Features
+## Planned Features
 
 - Research gap detection
-- Literature review generation
-- Fine-tuned explainer model (LoRA)
+- Automated literature review generation
+- Fine-tuned explanation model (LoRA)
 - Personalized research memory
 - Citation graph visualization
 - Model evaluation pipeline
@@ -98,6 +99,8 @@ Interact with papers through conversational retrieval while preserving citations
 
 ## Project Architecture
 
+### Research Retrieval Pipeline
+
 ```text
 User Query
     ↓
@@ -105,16 +108,16 @@ Query Understanding Agent
     ↓
 Retrieval Manager
         ↓
-        ├── arXiv
-        ├── Semantic Scholar
-        ├── PubMed
-        ├── OpenAlex
-        ├── CrossRef
+        ├── arXiv Retriever
+        ├── Semantic Scholar Retriever
+        ├── PubMed Retriever
+        ├── OpenAlex Retriever
+        ├── CrossRef Retriever
         └── Web Retrieval Agent
                     ↓
-              Government sites
-              University sites
-              Research pages
+              Government Sites
+              University Repositories
+              Research Websites
     ↓
 Ranking Agent
     ↓
@@ -123,7 +126,7 @@ Explanation Agent
 Results
 ```
 
-PDF workflow:
+### PDF Analysis Pipeline
 
 ```text
 PDF Upload
@@ -145,44 +148,50 @@ Q&A Agent
 
 ## Current Progress
 
-- ✅ Day 1: Project setup
-- ✅ Day 2: arXiv paper retrieval
-- ✅ Day 3: Semantic Scholar retrieval
-- ✅ Day 4: Retrieval manager and logging
-- ✅ Day 5: PubMed,OpenAlex,CrossRef retrieval
+- ✅ Day 1 — Project setup
+- ✅ Day 2 — arXiv paper retrieval
+- ✅ Day 3 — Semantic Scholar retrieval
+- ✅ Day 4 — Retrieval manager and logging
+- ✅ Day 5 — PubMed, OpenAlex, and CrossRef retrieval
 
 ---
 
-## Tech Stack (Planned)
+## Tech Stack
 
-Backend:
+### Backend
+
 - Python
 - FastAPI
 - LangGraph
 
-AI:
+### AI / ML
+
 - OpenAI API
 - LoRA fine-tuning
-- RAG
+- Retrieval-Augmented Generation (RAG)
 
-Database:
+### Database
+
 - ChromaDB
 
-PDF Processing:
+### PDF Processing
+
 - PyMuPDF
 
-Deployment:
+### Deployment
+
 - Docker
 
 ---
 
 ## Contributing
 
-Contributions, ideas, and feature suggestions are welcome.
-Future contribution guidelines will be added.
+Contributions, ideas, feature requests, and feedback are welcome.
+
+Contribution guidelines will be added in future updates.
 
 ---
 
 ## License
 
-MIT License
+This project is licensed under the MIT License.
