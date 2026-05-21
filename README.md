@@ -153,6 +153,7 @@ Q&A Agent
 - ✅ Day 3 — Semantic Scholar retrieval
 - ✅ Day 4 — Retrieval manager and logging
 - ✅ Day 5 — PubMed, OpenAlex, and CrossRef retrieval
+- ✅ Day 6 — Source Discovery and Web Retrieval foundation"
 
 ---
 
