@@ -1,4 +1,6 @@
 from openai import OpenAI
+import json
+from backend.schemas.ranking import RankingResult
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -95,4 +97,7 @@ OUTPUT FORMAT:
         ]
     )
 
-    return response.choices[0].message.content
+    response_content = response.choices[0].message.content
+    result = RankingResult(**json.loads(response_content))
+    
+    return result

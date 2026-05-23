@@ -5,7 +5,9 @@ query="multi agent memory systems"
 
 papers=retrieve_all(query,2)
 
-for paper in papers[:3]:
+for paper in papers[2:5]:
     result=rank_paper(query,paper)
     print("="*50)
-    print(result)
+    print(result.paper_name)
+    print(result.total_score)
+    print(result.why_it_matches)
