@@ -155,6 +155,7 @@ Q&A Agent
 - ✅ Day 5 — PubMed, OpenAlex, and CrossRef retrieval
 - ✅ Day 6 — Source Discovery and Web Retrieval foundation
 - ✅ Day 7 — Ranking Agent v1
+- ✅ Day 8 — Ranking Result Schema and JSON Parser
 
 ---
 
