@@ -9,7 +9,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-def rank_paper(query,paper,project_details=None):
+def rank_paper(query,paper,project_description=None):
 
     prompt = f"""
 You are a research paper relevance scoring agent. Evaluate the paper below against the user's query and return a structured JSON response.
@@ -20,7 +20,7 @@ USER QUERY:
 {query}
 
 USER PROJECT DETAILS: (Use this field if details given else ignore if None)
-{project_details}
+{project_description}
 
 PAPER:
 Title: {paper.title}

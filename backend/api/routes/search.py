@@ -9,7 +9,7 @@ router = APIRouter()
 
 class SearchRequest(BaseModel):
     query: str
-    project_description: Optional[str]
+    project_descripton: Optional[str]
     max_results_per_source: Optional[int] = 5
 
 class SearchResponse(BaseModel):
@@ -34,12 +34,15 @@ async def search_and_rank(request: SearchRequest):
             ranked_results=[]
         )
 
-    ranked = rank_paper(
-        paper=papers,
+    ranked = [
+    rank_paper(
+        paper=paper,
         query=request.query,
         project_description=request.project_description
     )
-
+    for paper in papers
+    ]
+    
     return SearchResponse(
         query=request.query,
         total_papers_retrieved=len(papers),
