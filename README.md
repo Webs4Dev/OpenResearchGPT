@@ -157,6 +157,7 @@ Q&A Agent
 - ✅ Day 7 — Ranking Agent v1
 - ✅ Day 8 — Ranking Result Schema and JSON Parser
 - ✅ Day 9 — FastAPI Endpoint (Ranking)
+- ✅ Day 10 — Fixing Endpoint issues  
 
 ---
 
