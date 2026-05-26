@@ -192,7 +192,6 @@ Q&A Agent
 ## Contributing
 
 Contributions, ideas, feature requests, and feedback are welcome.
-
 Contribution guidelines will be added in future updates.
 
 ---
