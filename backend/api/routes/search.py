@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel
 from typing import Optional
 
 from backend.retrieval.manager import retrieve_all, ALL_SOURCES
@@ -13,29 +13,6 @@ class SearchRequest(BaseModel):
     project_description: Optional[str] = None   
     max_results_per_source: Optional[int] = 5
     sources: Optional[list[str]] = None           
-
-    @field_validator("query")
-    @classmethod
-    def query_not_empty(cls, v):
-        if not v.strip():
-            raise ValueError("Query cannot be empty.")
-        return v.strip()
-
-    @field_validator("sources")
-    @classmethod
-    def validate_sources(cls, v):
-        if v is None:
-            return v
-        if len(v) == 0:
-            raise ValueError("sources list cannot be empty.")
-        invalid = [s for s in v if s not in ALL_SOURCES]
-        if invalid:
-            raise ValueError(
-                f"Invalid sources: {invalid}. "
-                f"Choose from: {list(ALL_SOURCES.keys())}"
-            )
-        return v
-
 
 class SourceReport(BaseModel):
     count: int
@@ -62,19 +39,30 @@ def list_sources():
 
 @router.post("/search", response_model=SearchResponse)
 async def search_and_rank(request: SearchRequest):
-    active_sources = request.sources or list(ALL_SOURCES.keys())
+
+    if not request.query.strip():
+        raise HTTPException(status_code=400,detail="Query cannot be empty")
+
+    if request.sources:
+        invalid = [source for source in request.sources if source not in ALL_SOURCES]
+        if invalid:
+            raise HTTPException(status_code=400,detail=f"Invalid sources: {invalid}")
+
+    active_sources = (request.sources or list(ALL_SOURCES.keys()))
 
     try:
         papers, report = retrieve_all(
             query=request.query,
             max_results=request.max_results_per_source,
-            sources=active_sources,
+            sources=active_sources
         )
-    except ValueError as e:
-        raise HTTPException(status_code=422, detail=str(e))
+
     except Exception as e:
-        log(f"Retrieval error: {e}")
-        raise HTTPException(status_code=500, detail="Retrieval failed. Check logs.")
+        log(f"Retrieval Error: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Retrieval failed"
+        )
 
     if not papers:
         return SearchResponse(
