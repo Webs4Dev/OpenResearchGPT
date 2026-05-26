@@ -158,6 +158,7 @@ Q&A Agent
 - ✅ Day 8 — Ranking Result Schema and JSON Parser
 - ✅ Day 9 — FastAPI Endpoint (Ranking)
 - ✅ Day 10 — Fixing Endpoint issues  
+- ✅ Day 11 — Concurrent Retrieval using ThreadPoolExecutor  
 
 ---
 
