@@ -4,6 +4,7 @@ from backend.retrieval.retriever_pubmed import search_papers as pubmed_search
 from backend.retrieval.retriever_openalex import search_papers as openalex_search
 from backend.retrieval.retriever_crossref import search_papers as crossref_search
 from backend.utils.logger import log
+from concurrent.futures import ThreadPoolExecutor,as_completed
 
 ALL_SOURCES = {
     "arxiv": arxiv_search,
@@ -12,6 +13,22 @@ ALL_SOURCES = {
     "openalex": openalex_search,
     "crossref": crossref_search,
 }
+
+
+def retrieve_source(source_name,retriever,query,max_results):
+    try:
+        results = retriever(
+            query=query,
+            max_results=max_results
+        )
+        return (
+            source_name,
+            results,
+            None
+        )
+    except Exception as e:
+        return (source_name,[],str(e))
+
 
 def retrieve_all(query: str,max_results: int,sources: list[str] | None = None) -> tuple[list, dict]:
     """
@@ -29,15 +46,40 @@ def retrieve_all(query: str,max_results: int,sources: list[str] | None = None) -
     papers = []     
     report = {}
 
-    for name in active:
-        log(f"Searching {name}...")
-        try:
-            results = ALL_SOURCES[name](query=query, max_results=max_results)
+    # Run all retrievers simultaneously instead of sequentially.
+    with ThreadPoolExecutor(max_workers=len(active)) as executor: 
+
+        futures={
+            executor.submit(retrieve_source,name,ALL_SOURCES[name],query,max_results):
+            name for name in active
+        }
+
+        for future in as_completed(futures):
+            source_name=(futures[future])
+            name,results,error=(
+                future.result()
+            )
+
             papers.extend(results)
-            report[name] = {"count": len(results), "status": "ok", "error": None}
-            log(f"[{name}] → {len(results)} papers")
-        except Exception as e:
-            report[name] = {"count": 0, "status": "error", "error": str(e)}
-            log(f"[{name}] failed: {e}")
+
+            if error:
+                report[name]={
+                    "count":0,
+                    "status":"error",
+                    "error":error
+                }
+                log(
+                    f"[{name}] failed: {error}"
+                )
+
+            else:
+                report[name]={
+                    "count":len(results),
+                    "status":"ok",
+                    "error":None
+                }
+                log(
+                    f"[{name}] -> {len(results)} papers"
+                )
 
     return papers, report

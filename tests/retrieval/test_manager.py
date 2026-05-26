@@ -1,12 +1,17 @@
-from backend.retrieval.manager import retrieve_all
+import time
 
-papers = retrieve_all(
-    query="LLM Fine Tuning using LoRa",
-    max_results=2
+from backend.retrieval.manager import (retrieve_all)
+
+start=time.time()
+
+papers,report=retrieve_all(
+    query="multi agent memory systems",
+    max_results=5
 )
 
-for i,paper in enumerate(papers):
+end=time.time()
 
-    print("="*50)
-    print(f"{i+1}. {paper.title}")
-    print(paper.url)
+print(f"\nRetrieved {len(papers)} papers")
+print(f"Time: {end-start:.2f} sec")
+
+print(report)
