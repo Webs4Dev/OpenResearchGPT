@@ -159,6 +159,7 @@ Q&A Agent
 - ✅ Day 9 — FastAPI Endpoint (Ranking)
 - ✅ Day 10 — Fixing Endpoint issues  
 - ✅ Day 11 — Concurrent Retrieval using ThreadPoolExecutor  
+- ✅ Day 12 — Concurrent Ranking using ThreadPoolExecutor
 
 ---
 
