@@ -3,8 +3,9 @@ from pydantic import BaseModel
 from typing import Optional
 
 from backend.retrieval.manager import retrieve_all, ALL_SOURCES
-from backend.agents.ranking_agent import rank_paper
+from backend.agents.ranking_agent import rank_multiple_papers
 from backend.utils.logger import log
+
 
 router = APIRouter()
 
@@ -74,18 +75,8 @@ async def search_and_rank(request: SearchRequest):
             ranked_results=[]
         )
 
-    ranked = []
-    for paper in papers:
-        try:
-            result = rank_paper(
-                query=request.query,
-                paper=paper,
-                project_description=request.project_description
-            )
-            ranked.append(result)
-        except Exception as e:
-            log(f"Ranking skipped for '{paper.title}': {e}")
-            continue   
+    ranked = rank_multiple_papers(request.query,papers,request.project_description)
+    ranked = [r.model_dump() for r in ranked]
 
     ranked.sort(key=lambda r: r.total_score, reverse=True)
 

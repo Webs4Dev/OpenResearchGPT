@@ -1,14 +1,12 @@
 import time
 
-from backend.retrieval.manager import (retrieve_all)
+from backend.retrieval.manager import retrieve_all
 
 start=time.time()
-
 papers,report=retrieve_all(
     query="multi agent memory systems",
     max_results=5
 )
-
 end=time.time()
 
 print(f"\nRetrieved {len(papers)} papers")

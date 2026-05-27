@@ -1,13 +1,22 @@
 from backend.retrieval.manager import retrieve_all
-from backend.agents.ranking_agent import rank_paper
+from backend.agents.ranking_agent import rank_paper,rank_multiple_papers
 
 query="multi agent memory systems"
 
-papers=retrieve_all(query,2)
+papers,_=retrieve_all(query,1)
 
-for paper in papers[2:5]:
-    result=rank_paper(query,paper)
-    print("="*50)
-    print(result.paper_name)
-    print(result.total_score)
-    print(result.why_it_matches)
+# To save tokens
+paper = papers[1]
+result = rank_paper(query,paper)
+print("="*50)
+print(result.paper_name)
+print(result.total_score)
+print(result.why_it_matches)
+
+# If we want to check all result for all papers
+# results=rank_multiple_papers(query,papers)
+# for result in results: 
+#     print("="*50)
+#     print(result.paper_name)
+#     print(result.total_score)
+#     print(result.why_it_matches)
