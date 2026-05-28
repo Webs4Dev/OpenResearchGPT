@@ -1,0 +1,15 @@
+from backend.retrieval.manager import retrieve_all
+
+from backend.retrieval.manager import (
+    retrieve_all
+)
+
+query="multi agent memory systems"
+
+papers,_=retrieve_all(
+    query=query,
+    max_results=3
+)
+
+for paper in papers:
+    print(paper.title)
