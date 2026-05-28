@@ -160,6 +160,7 @@ Q&A Agent
 - ✅ Day 10 — Fixing Endpoint issues  
 - ✅ Day 11 — Concurrent Retrieval using ThreadPoolExecutor  
 - ✅ Day 12 — Concurrent Ranking using ThreadPoolExecutor
+- ✅ Day 13 — Paper Deduplication Layer
 
 ---
 
