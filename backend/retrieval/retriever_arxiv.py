@@ -3,6 +3,7 @@ import arxiv
 import os
 from dotenv import load_dotenv
 from backend.schemas.paper import Paper
+from backend.utils.logger import log
 load_dotenv()
 
 EMAIL = os.getenv("EMAIL")
@@ -35,15 +36,15 @@ def search_papers(query: str, max_results: int):
             papers.append(
                 Paper(
                     title=paper.title,
-                    abstract=paper.summary,   
+                    abstract=paper.summary or "Not Available",   
                     authors=[a.name for a in paper.authors],
-                    published_year=paper.published.year,
-                    url=paper.pdf_url,
+                    published_year=paper.published.year or "Not Available",
+                    url=paper.pdf_url or "Not Available",
                     source="arxiv"
                 )
             )
 
     except Exception as e:
-        print(f"ArXiv Error: {e}")
+        log(f"ArXiv Error: {e}")
 
     return papers

@@ -16,26 +16,34 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 def rank_paper(query,paper,project_description=None):
 
-    prompt = RANKING_PROMPT.format(
-      query=query,
-      project_description=project_description,
-      paper=paper
-    )
+  prompt = RANKING_PROMPT.format(
+    query=query,
+    project_description=project_description,
+    paper=paper
+  )
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role":"user",
-                "content":prompt
-            }
-        ]
-    )
+  response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+      {
+        "role":"user",
+        "content":prompt
+      }
+    ]
+  )
 
-    response_content = response.choices[0].message.content
-    result = RankingResult(**json.loads(response_content))
-    
+  response_content = response.choices[0].message.content
+  try:
+
+    parsed = json.loads(response_content)
+    result = RankingResult(**parsed)
+
     return result
+
+  except Exception as e:
+    log(f"JSON Parse Error: {e}")
+
+    return None
 
 
 def rank_multiple_papers(query,papers,project_description=None):
@@ -57,6 +65,6 @@ def rank_multiple_papers(query,papers,project_description=None):
           results.append(result)
 
       except Exception as e:
-        log(f"Ranking failed: {e}")
+        log(f"[Ranking Agent] {e}")
                 
   return results

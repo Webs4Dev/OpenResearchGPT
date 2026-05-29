@@ -7,4 +7,5 @@ class Paper(BaseModel):
     authors: list[str]
     published_year: Optional[int] = None
     url: Optional[str] = None
+    citation_count: int = 0
     source: str

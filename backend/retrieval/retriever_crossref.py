@@ -1,4 +1,5 @@
 from backend.schemas.paper import Paper
+from backend.utils.logger import log
 from dotenv import load_dotenv
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -94,21 +95,21 @@ def search_papers(query:str,max_results:int):
             papers.append(
                 Paper(
                     title=title,
-                    abstract=abstract,
+                    abstract=abstract or "Not Available",
                     authors=authors,
-                    published_year=year,
-                    url=url,
+                    published_year=year or "Not Available",
+                    url=url or "Not Available",
                     source="crossref"
                 )
             )
 
     except requests.exceptions.Timeout:
-        print("Crossref Timeout Error")
+        log("Crossref Timeout Error")
 
     except requests.exceptions.RequestException as e:
-        print(f"Crossref Request Error: {e}")
+        log(f"Crossref Request Error: {e}")
 
     except Exception as e:
-        print(f"Crossref Error: {e}")
+        log(f"Crossref Error: {e}")
 
     return papers

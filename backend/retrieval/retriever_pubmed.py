@@ -1,5 +1,6 @@
 from Bio import Entrez
 from backend.schemas.paper import Paper
+from backend.utils.logger import log
 from dotenv import load_dotenv
 import os
 
@@ -124,17 +125,15 @@ def search_papers(query:str,max_results:int):
             papers.append(
                 Paper(
                     title=title,
-                    abstract=abstract,
+                    abstract=abstract or "Not Available",
                     authors=authors,
-                    published_year=year,
-                    url=get_pdf_url(pmid),
+                    published_year=year or "Not Available",
+                    url=get_pdf_url(pmid) or "Not Available",
                     source="pubmed"
                 )
             )
 
     except Exception as e:
-        print(
-            f"PubMed Error: {e}"
-        )
+        log(f"PubMed Error: {e}")
 
     return papers

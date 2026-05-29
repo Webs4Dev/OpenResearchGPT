@@ -1,4 +1,5 @@
 from backend.schemas.paper import Paper
+from backend.utils.logger import log
 from dotenv import load_dotenv
 import requests
 import os
@@ -96,17 +97,15 @@ def search_papers(query:str,max_results:int):
             papers.append(
                 Paper(
                     title=title,
-                    abstract=abstract,
+                    abstract=abstract or "Not Available",
                     authors=authors,
-                    published_year=year,
-                    url=pdf_url,
+                    published_year=year or "Not Available",
+                    url=pdf_url or "Not Available",
                     source="openalex"
                 )
             )
 
     except Exception as e:
-        print(
-            f"OpenAlex Error: {e}"
-        )
+        log(f"OpenAlex Error: {e}")
 
     return papers

@@ -1,4 +1,5 @@
 from backend.schemas.paper import Paper
+from backend.utils.logger import log
 from semanticscholar import SemanticScholar
 from dotenv import load_dotenv
 import os
@@ -41,15 +42,15 @@ def search_papers(query: str,max_results: int):
             papers.append(
                 Paper(
                     title=paper.title,
-                    abstract=paper.abstract,
+                    abstract=paper.abstract or "Not Available",
                     authors=[a.name for a in paper.authors],
-                    published_year=paper.year,
-                    url=pdf_url,
+                    published_year=paper.year or "Not Available",
+                    url=pdf_url or "Not Available",
                     source="semantic_scholar"
                 )
             )
 
     except Exception as e:
-        print(f"Semantic Scholar Error: {e}")
+        log(f"Semantic Scholar Error: {e}")
 
     return papers

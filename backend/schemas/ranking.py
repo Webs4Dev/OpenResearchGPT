@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class Scores(BaseModel):
     topic_match: int
@@ -12,7 +13,7 @@ class RankingResult(BaseModel):
     paper_name: str
     source: str
     pdf_status: str
-    paper_url: str
+    paper_url: Optional[str] = None
     scores: Scores
     total_score: int
     why_it_matches: list[str]
