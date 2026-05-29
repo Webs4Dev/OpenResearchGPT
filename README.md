@@ -161,6 +161,7 @@ Q&A Agent
 - ✅ Day 11 — Concurrent Retrieval using ThreadPoolExecutor  
 - ✅ Day 12 — Concurrent Ranking using ThreadPoolExecutor
 - ✅ Day 13 — Paper Deduplication Layer
+- ✅ Day 14 — Edge Case Handling and Ranking Robustness
 
 ---
 
