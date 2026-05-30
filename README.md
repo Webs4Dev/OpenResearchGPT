@@ -162,6 +162,7 @@ Q&A Agent
 - ✅ Day 12 — Concurrent Ranking using ThreadPoolExecutor
 - ✅ Day 13 — Paper Deduplication Layer
 - ✅ Day 14 — Edge Case Handling and Ranking Robustness
+- ✅ Day 15 — LLM-powered Source Discovery Agent
 
 ---
 
