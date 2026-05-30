@@ -1,7 +1,7 @@
-from backend.agents.source_discovery_agent import generate_search_queries
+from backend.agents.source_discovery_agent import discover_sources
 
-queries = generate_search_queries("multi agent memory systems")
-print("\nGenerated Queries:")
+result=discover_sources(
+    "multi agent memory systems"
+)
 
-for query in queries:
-    print(query)
+print(result)
